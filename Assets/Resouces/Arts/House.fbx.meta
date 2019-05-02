@@ -1,0 +1,613 @@
+fileFormatVersion: 2
+guid: f556f3841412c2641bdc561af739a61e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Glass1
+    100002: Glass10
+    100004: Glass11
+    100006: Glass12
+    100008: Glass13
+    100010: Glass14
+    100012: Glass15
+    100014: Glass16
+    100016: Glass17
+    100018: Glass18
+    100020: Glass19
+    100022: Glass2
+    100024: Glass20
+    100026: Glass21
+    100028: Glass3
+    100030: Glass4
+    100032: Glass5
+    100034: Glass6
+    100036: Glass7
+    100038: Glass8
+    100040: Glass9
+    100042: //RootNode
+    100044: HouseOutside
+    100046: Roof
+    100048: Wall
+    100050: Wall1
+    100052: Wall2
+    100054: Wall3
+    100056: Wall4
+    100058: Wall5
+    100060: Wall6
+    100062: Wall7
+    100064: Wall8
+    100066: Wall9
+    100068: Walls
+    100070: Window
+    100072: Window1
+    100074: Window10
+    100076: Window11
+    100078: Window2
+    100080: Window3
+    100082: Window4
+    100084: Window5
+    100086: Window6
+    100088: Window7
+    100090: Window8
+    100092: Window9
+    100094: WindowBorder
+    100096: WindowBorder 1
+    100098: WindowBorder 10
+    100100: WindowBorder 11
+    100102: WindowBorder 2
+    100104: WindowBorder 3
+    100106: WindowBorder 4
+    100108: WindowBorder 5
+    100110: WindowBorder 6
+    100112: WindowBorder 7
+    100114: WindowBorder 8
+    100116: WindowBorder 9
+    100118: WindowBorder1
+    100120: WindowBorder1 1
+    100122: WindowBorder1 10
+    100124: WindowBorder1 11
+    100126: WindowBorder1 2
+    100128: WindowBorder1 3
+    100130: WindowBorder1 4
+    100132: WindowBorder1 5
+    100134: WindowBorder1 6
+    100136: WindowBorder1 7
+    100138: WindowBorder1 8
+    100140: WindowBorder1 9
+    100142: WindowBorder10
+    100144: WindowBorder11
+    100146: WindowBorder12
+    100148: WindowBorder13
+    100150: WindowBorder14
+    100152: WindowBorder2
+    100154: WindowBorder2 1
+    100156: WindowBorder3
+    100158: WindowBorder3 1
+    100160: WindowBorder3 10
+    100162: WindowBorder3 11
+    100164: WindowBorder3 2
+    100166: WindowBorder3 3
+    100168: WindowBorder3 4
+    100170: WindowBorder3 5
+    100172: WindowBorder3 6
+    100174: WindowBorder3 7
+    100176: WindowBorder3 8
+    100178: WindowBorder3 9
+    100180: WindowBorder4
+    100182: WindowBorder4 1
+    100184: WindowBorder4 2
+    100186: WindowBorder4 3
+    100188: WindowBorder5
+    100190: WindowBorder5 1
+    100192: WindowBorder5 10
+    100194: WindowBorder5 11
+    100196: WindowBorder5 2
+    100198: WindowBorder5 3
+    100200: WindowBorder5 4
+    100202: WindowBorder5 5
+    100204: WindowBorder5 6
+    100206: WindowBorder5 7
+    100208: WindowBorder5 8
+    100210: WindowBorder5 9
+    100212: WindowBorder6
+    100214: WindowBorder6 1
+    100216: WindowBorder7
+    100218: WindowBorder7 1
+    100220: WindowBorder7 2
+    100222: WindowBorder7 3
+    100224: WindowBorder9
+    400000: Glass1
+    400002: Glass10
+    400004: Glass11
+    400006: Glass12
+    400008: Glass13
+    400010: Glass14
+    400012: Glass15
+    400014: Glass16
+    400016: Glass17
+    400018: Glass18
+    400020: Glass19
+    400022: Glass2
+    400024: Glass20
+    400026: Glass21
+    400028: Glass3
+    400030: Glass4
+    400032: Glass5
+    400034: Glass6
+    400036: Glass7
+    400038: Glass8
+    400040: Glass9
+    400042: //RootNode
+    400044: HouseOutside
+    400046: Roof
+    400048: Wall
+    400050: Wall1
+    400052: Wall2
+    400054: Wall3
+    400056: Wall4
+    400058: Wall5
+    400060: Wall6
+    400062: Wall7
+    400064: Wall8
+    400066: Wall9
+    400068: Walls
+    400070: Window
+    400072: Window1
+    400074: Window10
+    400076: Window11
+    400078: Window2
+    400080: Window3
+    400082: Window4
+    400084: Window5
+    400086: Window6
+    400088: Window7
+    400090: Window8
+    400092: Window9
+    400094: WindowBorder
+    400096: WindowBorder 1
+    400098: WindowBorder 10
+    400100: WindowBorder 11
+    400102: WindowBorder 2
+    400104: WindowBorder 3
+    400106: WindowBorder 4
+    400108: WindowBorder 5
+    400110: WindowBorder 6
+    400112: WindowBorder 7
+    400114: WindowBorder 8
+    400116: WindowBorder 9
+    400118: WindowBorder1
+    400120: WindowBorder1 1
+    400122: WindowBorder1 10
+    400124: WindowBorder1 11
+    400126: WindowBorder1 2
+    400128: WindowBorder1 3
+    400130: WindowBorder1 4
+    400132: WindowBorder1 5
+    400134: WindowBorder1 6
+    400136: WindowBorder1 7
+    400138: WindowBorder1 8
+    400140: WindowBorder1 9
+    400142: WindowBorder10
+    400144: WindowBorder11
+    400146: WindowBorder12
+    400148: WindowBorder13
+    400150: WindowBorder14
+    400152: WindowBorder2
+    400154: WindowBorder2 1
+    400156: WindowBorder3
+    400158: WindowBorder3 1
+    400160: WindowBorder3 10
+    400162: WindowBorder3 11
+    400164: WindowBorder3 2
+    400166: WindowBorder3 3
+    400168: WindowBorder3 4
+    400170: WindowBorder3 5
+    400172: WindowBorder3 6
+    400174: WindowBorder3 7
+    400176: WindowBorder3 8
+    400178: WindowBorder3 9
+    400180: WindowBorder4
+    400182: WindowBorder4 1
+    400184: WindowBorder4 2
+    400186: WindowBorder4 3
+    400188: WindowBorder5
+    400190: WindowBorder5 1
+    400192: WindowBorder5 10
+    400194: WindowBorder5 11
+    400196: WindowBorder5 2
+    400198: WindowBorder5 3
+    400200: WindowBorder5 4
+    400202: WindowBorder5 5
+    400204: WindowBorder5 6
+    400206: WindowBorder5 7
+    400208: WindowBorder5 8
+    400210: WindowBorder5 9
+    400212: WindowBorder6
+    400214: WindowBorder6 1
+    400216: WindowBorder7
+    400218: WindowBorder7 1
+    400220: WindowBorder7 2
+    400222: WindowBorder7 3
+    400224: WindowBorder9
+    2100000: HouseRoofMat
+    2100002: WindowBorder8
+    2100004: HouseMatOutside
+    2100006: Glass
+    2100008: lambert1
+    2300000: Glass1
+    2300002: Glass10
+    2300004: Glass11
+    2300006: Glass12
+    2300008: Glass13
+    2300010: Glass14
+    2300012: Glass15
+    2300014: Glass16
+    2300016: Glass17
+    2300018: Glass18
+    2300020: Glass19
+    2300022: Glass2
+    2300024: Glass20
+    2300026: Glass3
+    2300028: Glass4
+    2300030: Glass5
+    2300032: Glass6
+    2300034: Glass7
+    2300036: Glass8
+    2300038: Glass9
+    2300040: HouseOutside
+    2300042: Roof
+    2300044: Wall
+    2300046: Wall1
+    2300048: Wall2
+    2300050: Wall3
+    2300052: Wall4
+    2300054: Wall5
+    2300056: Wall6
+    2300058: Wall7
+    2300060: Wall8
+    2300062: Wall9
+    2300064: WindowBorder
+    2300066: WindowBorder 1
+    2300068: WindowBorder 10
+    2300070: WindowBorder 11
+    2300072: WindowBorder 2
+    2300074: WindowBorder 3
+    2300076: WindowBorder 4
+    2300078: WindowBorder 5
+    2300080: WindowBorder 6
+    2300082: WindowBorder 7
+    2300084: WindowBorder 8
+    2300086: WindowBorder 9
+    2300088: WindowBorder1
+    2300090: WindowBorder1 1
+    2300092: WindowBorder1 10
+    2300094: WindowBorder1 11
+    2300096: WindowBorder1 2
+    2300098: WindowBorder1 3
+    2300100: WindowBorder1 4
+    2300102: WindowBorder1 5
+    2300104: WindowBorder1 6
+    2300106: WindowBorder1 7
+    2300108: WindowBorder1 8
+    2300110: WindowBorder1 9
+    2300112: WindowBorder10
+    2300114: WindowBorder11
+    2300116: WindowBorder12
+    2300118: WindowBorder13
+    2300120: WindowBorder14
+    2300122: WindowBorder2
+    2300124: WindowBorder2 1
+    2300126: WindowBorder3
+    2300128: WindowBorder3 1
+    2300130: WindowBorder3 10
+    2300132: WindowBorder3 11
+    2300134: WindowBorder3 2
+    2300136: WindowBorder3 3
+    2300138: WindowBorder3 4
+    2300140: WindowBorder3 5
+    2300142: WindowBorder3 6
+    2300144: WindowBorder3 7
+    2300146: WindowBorder3 8
+    2300148: WindowBorder3 9
+    2300150: WindowBorder4
+    2300152: WindowBorder4 1
+    2300154: WindowBorder4 2
+    2300156: WindowBorder4 3
+    2300158: WindowBorder5
+    2300160: WindowBorder5 1
+    2300162: WindowBorder5 10
+    2300164: WindowBorder5 11
+    2300166: WindowBorder5 2
+    2300168: WindowBorder5 3
+    2300170: WindowBorder5 4
+    2300172: WindowBorder5 5
+    2300174: WindowBorder5 6
+    2300176: WindowBorder5 7
+    2300178: WindowBorder5 8
+    2300180: WindowBorder5 9
+    2300182: WindowBorder6
+    2300184: WindowBorder6 1
+    2300186: WindowBorder7
+    2300188: WindowBorder7 1
+    2300190: WindowBorder7 2
+    2300192: WindowBorder7 3
+    2300194: WindowBorder9
+    3300000: Glass1
+    3300002: Glass10
+    3300004: Glass11
+    3300006: Glass12
+    3300008: Glass13
+    3300010: Glass14
+    3300012: Glass15
+    3300014: Glass16
+    3300016: Glass17
+    3300018: Glass18
+    3300020: Glass19
+    3300022: Glass2
+    3300024: Glass20
+    3300026: Glass3
+    3300028: Glass4
+    3300030: Glass5
+    3300032: Glass6
+    3300034: Glass7
+    3300036: Glass8
+    3300038: Glass9
+    3300040: HouseOutside
+    3300042: Roof
+    3300044: Wall
+    3300046: Wall1
+    3300048: Wall2
+    3300050: Wall3
+    3300052: Wall4
+    3300054: Wall5
+    3300056: Wall6
+    3300058: Wall7
+    3300060: Wall8
+    3300062: Wall9
+    3300064: WindowBorder
+    3300066: WindowBorder 1
+    3300068: WindowBorder 10
+    3300070: WindowBorder 11
+    3300072: WindowBorder 2
+    3300074: WindowBorder 3
+    3300076: WindowBorder 4
+    3300078: WindowBorder 5
+    3300080: WindowBorder 6
+    3300082: WindowBorder 7
+    3300084: WindowBorder 8
+    3300086: WindowBorder 9
+    3300088: WindowBorder1
+    3300090: WindowBorder1 1
+    3300092: WindowBorder1 10
+    3300094: WindowBorder1 11
+    3300096: WindowBorder1 2
+    3300098: WindowBorder1 3
+    3300100: WindowBorder1 4
+    3300102: WindowBorder1 5
+    3300104: WindowBorder1 6
+    3300106: WindowBorder1 7
+    3300108: WindowBorder1 8
+    3300110: WindowBorder1 9
+    3300112: WindowBorder10
+    3300114: WindowBorder11
+    3300116: WindowBorder12
+    3300118: WindowBorder13
+    3300120: WindowBorder14
+    3300122: WindowBorder2
+    3300124: WindowBorder2 1
+    3300126: WindowBorder3
+    3300128: WindowBorder3 1
+    3300130: WindowBorder3 10
+    3300132: WindowBorder3 11
+    3300134: WindowBorder3 2
+    3300136: WindowBorder3 3
+    3300138: WindowBorder3 4
+    3300140: WindowBorder3 5
+    3300142: WindowBorder3 6
+    3300144: WindowBorder3 7
+    3300146: WindowBorder3 8
+    3300148: WindowBorder3 9
+    3300150: WindowBorder4
+    3300152: WindowBorder4 1
+    3300154: WindowBorder4 2
+    3300156: WindowBorder4 3
+    3300158: WindowBorder5
+    3300160: WindowBorder5 1
+    3300162: WindowBorder5 10
+    3300164: WindowBorder5 11
+    3300166: WindowBorder5 2
+    3300168: WindowBorder5 3
+    3300170: WindowBorder5 4
+    3300172: WindowBorder5 5
+    3300174: WindowBorder5 6
+    3300176: WindowBorder5 7
+    3300178: WindowBorder5 8
+    3300180: WindowBorder5 9
+    3300182: WindowBorder6
+    3300184: WindowBorder6 1
+    3300186: WindowBorder7
+    3300188: WindowBorder7 1
+    3300190: WindowBorder7 2
+    3300192: WindowBorder7 3
+    3300194: WindowBorder9
+    4300000: Roof
+    4300002: WindowBorder
+    4300004: WindowBorder1
+    4300006: WindowBorder7
+    4300008: WindowBorder4
+    4300010: WindowBorder5
+    4300012: WindowBorder3
+    4300014: WindowBorder
+    4300016: WindowBorder1
+    4300018: WindowBorder7
+    4300020: WindowBorder4
+    4300022: WindowBorder5
+    4300024: WindowBorder3
+    4300026: WindowBorder
+    4300028: WindowBorder1
+    4300030: WindowBorder5
+    4300032: WindowBorder3
+    4300034: WindowBorder
+    4300036: WindowBorder1
+    4300038: WindowBorder5
+    4300040: WindowBorder3
+    4300042: WindowBorder
+    4300044: WindowBorder1
+    4300046: WindowBorder7
+    4300048: WindowBorder4
+    4300050: WindowBorder5
+    4300052: WindowBorder3
+    4300054: WindowBorder
+    4300056: WindowBorder1
+    4300058: WindowBorder5
+    4300060: WindowBorder3
+    4300062: WindowBorder
+    4300064: WindowBorder1
+    4300066: WindowBorder5
+    4300068: WindowBorder3
+    4300070: WindowBorder
+    4300072: WindowBorder1
+    4300074: WindowBorder5
+    4300076: WindowBorder3
+    4300078: WindowBorder
+    4300080: WindowBorder2
+    4300082: WindowBorder1
+    4300084: WindowBorder6
+    4300086: WindowBorder5
+    4300088: WindowBorder3
+    4300090: WindowBorder9
+    4300092: WindowBorder10
+    4300094: WindowBorder11
+    4300096: WindowBorder12
+    4300098: WindowBorder13
+    4300100: WindowBorder14
+    4300102: WindowBorder
+    4300104: WindowBorder1
+    4300106: WindowBorder5
+    4300108: WindowBorder3
+    4300110: WindowBorder
+    4300112: WindowBorder1
+    4300114: WindowBorder5
+    4300116: WindowBorder3
+    4300118: WindowBorder
+    4300120: WindowBorder2
+    4300122: WindowBorder1
+    4300124: WindowBorder6
+    4300126: WindowBorder7
+    4300128: WindowBorder4
+    4300130: WindowBorder5
+    4300132: WindowBorder3
+    4300134: HouseOutside
+    4300136: Glass20
+    4300138: Glass19
+    4300140: Glass18
+    4300142: Glass17
+    4300144: Glass16
+    4300146: Glass15
+    4300148: Glass14
+    4300150: Glass13
+    4300152: Glass12
+    4300154: Glass11
+    4300156: Glass10
+    4300158: Glass9
+    4300160: Glass8
+    4300162: Glass7
+    4300164: Glass6
+    4300166: Glass5
+    4300168: Glass4
+    4300170: Glass3
+    4300172: Glass2
+    4300174: Glass1
+    4300176: Wall
+    4300178: Wall1
+    4300180: Wall2
+    4300182: Wall3
+    4300184: Wall4
+    4300186: Wall5
+    4300188: Wall6
+    4300190: Wall7
+    4300192: Wall8
+    4300194: Wall9
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

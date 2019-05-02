@@ -1,0 +1,271 @@
+fileFormatVersion: 2
+guid: e26ce31a1034d6842be5f96bb72f21dc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: ass
+    100002: big_arm
+    100004: big_arm 1
+    100006: big_leg
+    100008: big_leg 1
+    100010: button
+    100012: button1
+    100014: button2
+    100016: button3
+    100018: button4
+    100020: chest
+    100022: cloth
+    100024: elbow_joint
+    100026: elbow_joint 1
+    100028: face
+    100030: foot
+    100032: foot 1
+    100034: hair
+    100036: hair2
+    100038: hand
+    100040: hand 1
+    100042: knee_joint
+    100044: knee_joint 1
+    100046: left_hand
+    100048: left_leg
+    100050: neck
+    100052: //RootNode
+    100054: pPipe1
+    100056: pSphere1
+    100058: right_hand
+    100060: right_leg
+    100062: shoes
+    100064: shoes8
+    100066: skirt4
+    100068: small_arm
+    100070: small_arm 1
+    100072: small_leg
+    100074: small_leg 1
+    100076: west
+    400000: ass
+    400002: big_arm
+    400004: big_arm 1
+    400006: big_leg
+    400008: big_leg 1
+    400010: button
+    400012: button1
+    400014: button2
+    400016: button3
+    400018: button4
+    400020: chest
+    400022: cloth
+    400024: elbow_joint
+    400026: elbow_joint 1
+    400028: face
+    400030: foot
+    400032: foot 1
+    400034: hair
+    400036: hair2
+    400038: hand
+    400040: hand 1
+    400042: knee_joint
+    400044: knee_joint 1
+    400046: left_hand
+    400048: left_leg
+    400050: neck
+    400052: //RootNode
+    400054: pPipe1
+    400056: pSphere1
+    400058: right_hand
+    400060: right_leg
+    400062: shoes
+    400064: shoes8
+    400066: skirt4
+    400068: small_arm
+    400070: small_arm 1
+    400072: small_leg
+    400074: small_leg 1
+    400076: west
+    2100000: skin
+    2100002: cloth1
+    2100004: button5
+    2100006: skirt3
+    2100008: hair3
+    2100010: shoes7
+    2300000: ass
+    2300002: big_arm
+    2300004: big_arm 1
+    2300006: big_leg
+    2300008: big_leg 1
+    2300010: button
+    2300012: button1
+    2300014: button2
+    2300016: button3
+    2300018: button4
+    2300020: chest
+    2300022: elbow_joint
+    2300024: elbow_joint 1
+    2300026: face
+    2300028: foot
+    2300030: foot 1
+    2300032: hair
+    2300034: hair2
+    2300036: hand
+    2300038: hand 1
+    2300040: knee_joint
+    2300042: knee_joint 1
+    2300044: neck
+    2300046: pPipe1
+    2300048: pSphere1
+    2300050: shoes
+    2300052: shoes8
+    2300054: skirt4
+    2300056: small_arm
+    2300058: small_arm 1
+    2300060: small_leg
+    2300062: small_leg 1
+    2300064: west
+    3300000: ass
+    3300002: big_arm
+    3300004: big_arm 1
+    3300006: big_leg
+    3300008: big_leg 1
+    3300010: button
+    3300012: button1
+    3300014: button2
+    3300016: button3
+    3300018: button4
+    3300020: chest
+    3300022: elbow_joint
+    3300024: elbow_joint 1
+    3300026: face
+    3300028: foot
+    3300030: foot 1
+    3300032: hair
+    3300034: hair2
+    3300036: hand
+    3300038: hand 1
+    3300040: knee_joint
+    3300042: knee_joint 1
+    3300044: neck
+    3300046: pPipe1
+    3300048: pSphere1
+    3300050: shoes
+    3300052: shoes8
+    3300054: skirt4
+    3300056: small_arm
+    3300058: small_arm 1
+    3300060: small_leg
+    3300062: small_leg 1
+    3300064: west
+    4300000: face
+    4300002: neck
+    4300004: chest
+    4300006: west
+    4300008: ass
+    4300010: small_arm
+    4300012: hand
+    4300014: elbow_joint
+    4300016: big_arm
+    4300018: big_leg
+    4300020: knee_joint
+    4300022: small_leg
+    4300024: foot
+    4300026: big_leg
+    4300028: knee_joint
+    4300030: small_leg
+    4300032: foot
+    4300034: small_arm
+    4300036: hand
+    4300038: elbow_joint
+    4300040: big_arm
+    4300042: pSphere1
+    4300044: pPipe1
+    4300046: button
+    4300048: button1
+    4300050: button2
+    4300052: button3
+    4300054: button4
+    4300056: skirt4
+    4300058: hair2
+    4300060: hair
+    4300062: shoes8
+    4300064: shoes
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
