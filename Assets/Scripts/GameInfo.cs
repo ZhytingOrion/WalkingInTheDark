@@ -36,7 +36,7 @@ public class GameInfo{
 
     public void LevelPass()     //通过关卡
     {
-        if(this.cntLevel == 5)  //通过所有关卡，游戏结束
+        if(this.cntLevel == 5)  //通过所有关卡，游戏结束0
         {
             cntGameState = GameState.Finish;
             OnGameStateChange(cntGameState);

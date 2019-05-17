@@ -5,16 +5,14 @@ public class LaserShoot : MonoBehaviour
 {
     SteamVR_LaserPointer slp;   //射线对象
     SteamVR_TrackedController stc;    //控制器对象
-    SteamVR_TrackedObject trackdeObject;  //手柄位置
+    SteamVR_TrackedObject trackedObject;  //手柄位置
 
     GameObject target = null;    //指向可以拾取的物体
     
     public Transform player;  //玩家    
     public Transform dic;   //方向
     public float speed;   //速度
-
-    public bool finishGame = true;
-
+    
     void Start()
     {
         slp = GetComponent<SteamVR_LaserPointer>();    //得到射线对象
@@ -25,15 +23,15 @@ public class LaserShoot : MonoBehaviour
         stc.TriggerUnclicked += OnTriggerUnclicked;    //响应手柄松开事件
         //stc.MenuButtonClicked += OnMenuClicked;    //圆盘上方的菜单键
 
-        trackdeObject = GetComponent<SteamVR_TrackedObject>();
+        trackedObject = GetComponent<SteamVR_TrackedObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (trackdeObject)
+        if (trackedObject)
         {
-            var device = SteamVR_Controller.Input((int)trackdeObject.index);
+            var device = SteamVR_Controller.Input((int)trackedObject.index);
             if (device.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
             {
                 Vector2 cc = device.GetAxis();
@@ -41,29 +39,25 @@ public class LaserShoot : MonoBehaviour
                                                                   //下，这里是控制器圆盘的上下左右控制
                 if (angle > 45 && angle < 135)
                 {
-                    player.Translate(-dic.forward * Time.deltaTime * speed);
-                    Debug.Log("下移");
+                    player.transform.position -= dic.forward * Time.deltaTime * speed;
                 }
 
                 //上  
                 if (angle < -45 && angle > -135)
                 {
-                    player.Translate(dic.forward * Time.deltaTime * speed);
-                    Debug.Log("上移");
+                    player.transform.position += dic.forward * Time.deltaTime * speed;
                 }
 
                 //左  
                 if ((angle < 180 && angle > 135) || (angle < -135 && angle > -180))
                 {
-                    Debug.Log("左");
-                    player.Translate(-dic.right * Time.deltaTime * speed);
+                    player.transform.position -= dic.right * Time.deltaTime * speed;
                 }
 
                 //右  
                 if ((angle > 0 && angle < 45) || (angle > -45 && angle < 0))
                 {
-                    Debug.Log("右");
-                    player.Translate(dic.right * Time.deltaTime * speed);
+                    player.transform.position += dic.right * Time.deltaTime * speed;
                 }
 
             }
@@ -84,26 +78,27 @@ public class LaserShoot : MonoBehaviour
         GameObject obj = e.target.gameObject;//得到指向的物体
         //if (obj.tag.Equals("Can Cach")) //如果我们选择的物体他的标签是Can Cach
         //{
-        //    target = obj;  //用全局变量记录这个物体
+            target = obj;  //用全局变量记录这个物体
         //}
     }
     void OnpointerOut(object sender, PointerEventArgs e)//射线离开事件
     {
-        if (target != null)  //如果是在能拾取的物体上离开
+        if (target != null)  //如果是在能标记的物体上离开
         {
             target = null;  //不再记录这个物体了
         }
     }
     void OnTriggerClicked(object sender, ClickedEventArgs e)//用来响应扳机扣动事件的行为
     {
-        if (finishGame) return;
+        if (GameInfo.Instance.CntGameState != GameState.Play) return;      //游戏结束的情况下不能再进行标记
         if (target != null)
         {
             if(target.transform.Find("LaserFlag") != null)  //已经有标记了
             {
                 return;
             }
-            GameObject flag = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/LaserFlag"));
+
+            GameObject flag = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LaserFlag"));
             flag.transform.parent = target.transform;
         }
     }

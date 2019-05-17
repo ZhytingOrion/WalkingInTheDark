@@ -40,7 +40,7 @@ public class BindRodControl : MonoBehaviour {
     {
         try
         {
-            return this.GetComponent<SteamVR_TrackedObject>();
+            return this.transform.parent.GetComponent<SteamVR_TrackedObject>();
         }
         catch (Exception e)
         {
@@ -66,41 +66,8 @@ public class BindRodControl : MonoBehaviour {
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        IsShock = false;  //每次按下，IsShock为false,才能保证手柄震动
-        //if(other.tag == "GuideRoad")
-        //{
-        //    StartCoroutine(Shock(0.5f, 2000));
-        //}
-        //else
-        //    StartCoroutine(Shock(0.5f, 500));
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        Debug.Log("TriggerEnter！" + other.gameObject.name);
-        IsShock = false;
-        KnockInfo knockInfo = null;
-        string tag = other.gameObject.tag;
-        knockInfoDic.TryGetValue(tag, out knockInfo);
-        if (knockInfo != null)
-        {
-            AudioSource audioSource = other.gameObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-            {
-                audioSource.clip = knockInfo.knockSound;
-                audioSource.Play();
-            }
-            StartCoroutine(Shock(knockInfo.knockShakeTime, (ushort)knockInfo.knockShakeStrength));
-        }
-        else StartCoroutine(Shock(0.5f, 1000));
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("碰撞！" + collision.gameObject.name);
         IsShock = false;
         KnockInfo knockInfo = null;
         string tag = collision.gameObject.tag;
@@ -115,7 +82,12 @@ public class BindRodControl : MonoBehaviour {
             }
             StartCoroutine(Shock(knockInfo.knockShakeTime, (ushort)knockInfo.knockShakeStrength));
         }
-        else StartCoroutine(Shock(0.5f, 1000));
+        else StartCoroutine(Shock(0.5f, 500));
+    }
+    
+    private void OnTriggerExit(Collider collision)
+    {
+        IsShock = false;
     }
 
     //定义了一个协程

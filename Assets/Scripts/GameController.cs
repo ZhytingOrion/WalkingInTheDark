@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour {
     public Material CarRoadMat;  //车道的替换材质
     public Material StaticEnvMat;   //静物的替换材质
 
+    public GaussianBlur gaussianBlur;
+
     public float ChangeSaturationTime = 3.0f;
 
     private void OnEnable()
@@ -33,6 +35,7 @@ public class GameController : MonoBehaviour {
         gameObjectsinRoad = GameObject.FindGameObjectsWithTag("Road");
         gameObjectsinCarRoad = GameObject.FindGameObjectsWithTag("CarRoad");
         gameObjectsinStaticEnv = GameObject.FindGameObjectsWithTag("Tree");
+        gaussianBlur = CameraObject.GetComponent<GaussianBlur>();
 	}
 	
 	// Update is called once per frame
@@ -53,10 +56,10 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(RoadMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
+                gaussianBlur.BlurRadius = 2.0f;
                 break;
             case 2:
                 //将车道地面改为BlindWorld
-                Debug.Log("CarRoadNumber: " + gameObjectsinCarRoad.Length);
                 for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
                 {
                     GameObject g = gameObjectsinCarRoad[i];
@@ -64,6 +67,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(CarRoadMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
+                gaussianBlur.BlurRadius = 1.6f;
                 break;
             case 3:
                 //将静物改成BlindWorld
@@ -74,6 +78,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(StaticEnvMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
+                gaussianBlur.BlurRadius = 1.2f;
                 break;
             case 4:
                 //将人改成BlindWorld
@@ -84,6 +89,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(PeopleMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
+                gaussianBlur.BlurRadius = 0.8f;
                 break;
             case 5:
                 //将材质球还原，挂上饱和度后处理
@@ -111,6 +117,7 @@ public class GameController : MonoBehaviour {
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
+                gaussianBlur.BlurRadius = 0.4f;
                 break;
         }
     }
@@ -120,11 +127,28 @@ public class GameController : MonoBehaviour {
         if (state == GameState.Finish)
         {
             //开启漫游模式
+            GameObject lefthand = CameraObject.transform.parent.Find("Controller (left)").gameObject;
+            GameObject righthand = CameraObject.transform.parent.Find("Controller (right)").gameObject;
+            lefthand.GetComponent<SteamVR_Teleporter>().enabled = true;
+            lefthand.GetComponent<SteamVR_LaserPointer>().color = Color.blue;
+            lefthand.GetComponent<SteamVR_LaserPointer>().thickness = 0.005f;
 
             //视觉恢复
             m_camera.cullingMask = -1;
             m_camera.clearFlags = CameraClearFlags.Skybox;
             StartCoroutine(recoverSaturation(this.ChangeSaturationTime));
+            gaussianBlur.enabled = false;
+
+            //触觉可视化关闭
+            lefthand.GetComponent<TouchThings>().enabled = false;
+            righthand.GetComponent<TouchThings>().enabled = false;
+
+            //删除RoadStep:
+            GameObject[] roadSteps = GameObject.FindGameObjectsWithTag("RoadStep");
+            for(int i = 0; i<roadSteps.Length;++i)
+            {
+                Destroy(roadSteps[i]);
+            }
         }
     }
 
@@ -136,5 +160,6 @@ public class GameController : MonoBehaviour {
             effect.saturation = Mathf.Clamp01(i * 1.0f / time);
             yield return null;
         }
+        effect.enabled = false;
     }
 }

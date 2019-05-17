@@ -18,13 +18,18 @@ public class CarControl : MonoBehaviour {
     //private Vector3 nextAgentDest = Vector3.down;   //设定为一个不可能的值
     public float remainDistToSetNextDest = 0.01f;
     private bool isRed = false;
-    private Vector3 stoppedPoint;
+    private float maxSpeed;
+    private bool isSomethingAhead = false;
+    private Quaternion lastRotation;
 
 	// Use this for initialization
 	void Start () {
         agent = this.GetComponent<NavMeshAgent>();
         agentDest = dest.transform.position;
         agent.SetDestination(agentDest);
+        maxSpeed = this.agent.speed;
+        lastRotation = this.transform.rotation;
+        agent.speed = Random.Range(3.5f, 5.0f);
     }
 	
 	// Update is called once per frame
@@ -33,27 +38,46 @@ public class CarControl : MonoBehaviour {
         {
             agent.velocity = Vector3.zero;
         }
-        //if(agent.remainingDistance<remainDistToSetNextDest && this.nextAgentDest!=Vector3.down)   //到达当前设定的目标点
-        //{
-        //    Debug.Log("到达当前目标点，切换下一个目标点");
-        //    this.agentDest = this.nextAgentDest;
-        //    agent.SetDestination(this.agentDest);
-        //    this.nextAgentDest = Vector3.down;
-        //}
-	}
+        Ray ray = new Ray(this.transform.position + this.transform.up * 0.5f, this.transform.forward);
+        RaycastHit hitInfo;
+        if(Physics.Raycast(ray, out hitInfo, 3.0f))    //判断前方三米路况
+        {
+            string tag = hitInfo.transform.tag;   //前方的物体标签 
+            switch (tag)
+            {
+                case "Car":                                               //前方有车
+                    float eular = Quaternion.Angle(this.lastRotation, this.transform.rotation);          //根据车辆偏转角度判断自己是左转、右转还是直行
+                    if (eular <= 0)                                       //左转/掉头车辆优先级最高
+                        StopTheCar();                                     //非左转/掉头车辆停车等待对方前进
+                    this.isSomethingAhead = true;                         //标记前方有物体
+                    break;
+                case "Player":                                            //前方有玩家
+                    StopTheCar();                                         //停车
+                    //播放刹车音效
+                    break;
+                case "People":                                            //前方有NPC
+                    StopTheCar();                                         //停车，此处为省资源不播放刹车音效，效果不好再加上
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (this.isSomethingAhead)
+        {
+            this.isSomethingAhead = false;
+            if (!this.isRed)
+            {
+                RestartTheCar();
+            }
+        }
+
+        lastRotation = this.transform.rotation;
+    }
 
     public void setDestination(Vector3 point)
     {
         agent.SetDestination(point);
         this.agentDest = point;
-        //if(this.nextAgentDest != Vector3.down)   //如果有下一个目标：直接新设定目标
-        //{
-        //    Debug.Log("有下一个目标，设定目标");
-        //    this.agentDest = this.nextAgentDest;
-        //    agent.SetDestination(this.agentDest);
-        //    this.nextAgentDest = Vector3.down;
-        //}
-        //this.nextAgentDest = point;
     }
 
     public void isTrafficLightRed(bool isRed)
@@ -61,18 +85,32 @@ public class CarControl : MonoBehaviour {
         this.isRed = isRed;
         if (isRed)
         {
-            stoppedPoint = this.transform.position;
-            Debug.Log(stoppedPoint + "红灯停");
-            //agent.SetDestination(this.transform.position);
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-            //this.GetComponent<NavMeshAgent>().enabled = false;
+            StopTheCar();
         }
         else
         {
-            //this.GetComponent<NavMeshAgent>().enabled = true;
-            agent.isStopped = false;
-            agent.SetDestination(this.agentDest);
+            RestartTheCar();
+        }
+    }
+
+    private void StopTheCar()
+    {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        //尝试关掉RigidBody和NavMeshAgent是否成功
+        //this.GetComponent<NavMeshAgent>().enabled = false;
+        Destroy(this.GetComponent<Rigidbody>());
+    }
+
+    private void RestartTheCar()
+    {
+        agent.isStopped = false;
+        agent.SetDestination(this.agentDest);
+        if (this.GetComponent<Rigidbody>() == null)
+        {
+            this.gameObject.AddComponent<Rigidbody>();
+            this.GetComponent<Rigidbody>().useGravity = false;
+            this.GetComponent<Rigidbody>().mass = 1000000f;
         }
     }
 }
