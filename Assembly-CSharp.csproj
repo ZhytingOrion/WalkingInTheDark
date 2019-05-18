@@ -53,10 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CarControl.cs" />
-     <Compile Include="Assets\Scripts\CarGuideControl.cs" />
-     <Compile Include="Assets\Scripts\CarMove.cs" />
      <Compile Include="Assets\Scripts\DataBasic.cs" />
+     <Compile Include="Assets\Scripts\Dynamics\CarControl.cs" />
+     <Compile Include="Assets\Scripts\Dynamics\CarGuideControl.cs" />
+     <Compile Include="Assets\Scripts\Dynamics\CarMove.cs" />
+     <Compile Include="Assets\Scripts\Dynamics\PeopleControl.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameInfo.cs" />
@@ -64,6 +65,7 @@
      <Compile Include="Assets\Scripts\Player\BindRodControl.cs" />
      <Compile Include="Assets\Scripts\Player\CameraMove.cs" />
      <Compile Include="Assets\Scripts\Player\LaserShoot.cs" />
+     <Compile Include="Assets\Scripts\Player\MovableChiars.cs" />
      <Compile Include="Assets\Scripts\Player\MoveAcrossThings.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
@@ -177,6 +179,7 @@
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
      <None Include="Assets\SteamVR\Mats\BlindShader_Ground.shader" />
+     <None Include="Assets\Resources\Arts\Mats\GroundMat.shader" />
      <None Include="Assets\SteamVR\Mats\OutlineShader.shader" />
      <None Include="Assets\Scripts\Shader\GaussianBlurShader.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />

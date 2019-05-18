@@ -13,17 +13,23 @@ public class TouchThings : MonoBehaviour
     {
         BlindWorldLayer = LayerMask.NameToLayer("BlindWorld");
         DefaultLayer = LayerMask.NameToLayer("Default");
+        this.gameObject.layer = BlindWorldLayer;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         GameObject collider = collision.gameObject;
-        if (collider.layer == BlindWorldLayer) return;     //可见的情况就不需要触摸轮廓了
+
+        if (collider.layer == BlindWorldLayer)
+        {
+            return;     //可见的情况就不需要触摸轮廓了
+        }
 
         Renderer[] renderers = collider.transform.GetComponentsInChildren<Renderer>(false);
 
         for(int i = 0; i<renderers.Length; ++i)
         {
+            if (renderers[i].gameObject.layer == BlindWorldLayer) continue;
             if (!originMats.ContainsKey(renderers[i].gameObject))
                 originMats.Add(renderers[i].gameObject, renderers[i].sharedMaterial);
             renderers[i].sharedMaterial = outlineMat;

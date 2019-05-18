@@ -1,4 +1,6 @@
 ﻿
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserShoot : MonoBehaviour
@@ -12,6 +14,10 @@ public class LaserShoot : MonoBehaviour
     public Transform player;  //玩家    
     public Transform dic;   //方向
     public float speed;   //速度
+
+    private Color m_color;
+    public List<Color> colorList = new List<Color>();
+    public List<string> tagsCanBeShot = new List<string>(); 
     
     void Start()
     {
@@ -36,28 +42,33 @@ public class LaserShoot : MonoBehaviour
             {
                 Vector2 cc = device.GetAxis();
                 float angle = VectorAngle(new Vector2(1, 0), cc); //调用角度计算公式           
-                                                                  //下，这里是控制器圆盘的上下左右控制
+                    
+                //下，这里是控制器圆盘的上下左右控制
                 if (angle > 45 && angle < 135)
                 {
-                    player.transform.position -= dic.forward * Time.deltaTime * speed;
+                    m_color = colorList[2];
+                    slp.changeColor(m_color);
                 }
 
-                //上  
+                //上
                 if (angle < -45 && angle > -135)
                 {
-                    player.transform.position += dic.forward * Time.deltaTime * speed;
+                    m_color = colorList[0];
+                    slp.changeColor(m_color);
                 }
 
                 //左  
                 if ((angle < 180 && angle > 135) || (angle < -135 && angle > -180))
                 {
-                    player.transform.position -= dic.right * Time.deltaTime * speed;
+                    m_color = colorList[3];
+                    slp.changeColor(m_color);
                 }
 
                 //右  
                 if ((angle > 0 && angle < 45) || (angle > -45 && angle < 0))
                 {
-                    player.transform.position += dic.right * Time.deltaTime * speed;
+                    m_color = colorList[1];
+                    slp.changeColor(m_color);
                 }
 
             }
@@ -76,10 +87,11 @@ public class LaserShoot : MonoBehaviour
     void OnpointerIn(object sender, PointerEventArgs e) //射线进入事件
     {
         GameObject obj = e.target.gameObject;//得到指向的物体
-        //if (obj.tag.Equals("Can Cach")) //如果我们选择的物体他的标签是Can Cach
-        //{
+        string tag = obj.tag;
+        if (tagsCanBeShot.Contains(tag))
+        {
             target = obj;  //用全局变量记录这个物体
-        //}
+        }
     }
     void OnpointerOut(object sender, PointerEventArgs e)//射线离开事件
     {
@@ -93,13 +105,18 @@ public class LaserShoot : MonoBehaviour
         if (GameInfo.Instance.CntGameState != GameState.Play) return;      //游戏结束的情况下不能再进行标记
         if (target != null)
         {
-            if(target.transform.Find("LaserFlag") != null)  //已经有标记了
+            Transform laserFlag = target.transform.Find("LaserFlag(Clone)");
+            if (laserFlag != null)  //已经有标记了
             {
+                laserFlag.GetComponent<Renderer>().material.color = m_color;
                 return;
             }
 
             GameObject flag = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LaserFlag"));
             flag.transform.parent = target.transform;
+            flag.transform.localPosition = Vector3.zero;
+            flag.layer = LayerMask.NameToLayer("BlindWorld");
+            flag.GetComponent<Renderer>().material.color = m_color;
         }
     }
     void OnTriggerUnclicked(object sender, ClickedEventArgs e)//用来响应扳机松开事件的行为

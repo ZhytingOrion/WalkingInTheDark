@@ -6,30 +6,39 @@ public class PlayerControl : MonoBehaviour {
 
     private Vector3 lastLoc;
     private Vector3 newLoc;
+    public GameObject HeadObject;
+    private Vector3 oldHeadPos;
 
 	// Use this for initialization
 	void Start () {
         newLoc = this.transform.position;
+        oldHeadPos = HeadObject.transform.localPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         lastLoc = newLoc;
         newLoc = this.transform.position;
+        //oldHeadPos = HeadObject.transform.localPosition;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //HeadObject.transform.localPosition = this.oldHeadPos;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Car")
+        if (other.gameObject.tag == "Car")
         {
             this.GetComponent<AudioSource>().Play();
             Debug.Log("Die");
         }
-        else if(other.tag == "GuideRoad")
+        else if (other.tag == "GuideRoad")
         {
             other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
         }
-        else if(other.tag == "RoadStep")
+        else if (other.tag == "RoadStep")
         {
             GameObject step = other.transform.Find("Step").gameObject;
             switch (JudgePlayerDirection())                                 //根据玩家行动的方向，调整脚印的方向。由于Environment有Y轴Rotation为-90，故此处都-90，也可以用LocalRotation

@@ -10,6 +10,7 @@ public class CarGuideControl : MonoBehaviour {
     public float startTime = 0.0f;
     private float time = 0.0f;
     private bool isRed = false;    //先绿灯再红灯
+    private WalkingLightsState lightState = WalkingLightsState.Green;
     private GameObject Car = null;
     private GameObject lastCar = null;
     public List<GameObject> walkingLights = new List<GameObject>();
@@ -26,17 +27,24 @@ public class CarGuideControl : MonoBehaviour {
             //Debug.Log("Car:" + this.gameObject.name + " - " + this.Car.name);
         }
         time += Time.deltaTime; 
+        if(time >= (greenTime + redTime - 3.0f) && lightState != WalkingLightsState.FlashGreen)
+        {
+            this.lightState = WalkingLightsState.FlashGreen;
+            turnTrafficLight();
+        }
         if(time >= greenTime + redTime && this.isRed)   //绿灯时间
         {
             this.isRed = false;
+            this.lightState = WalkingLightsState.Red;
             turnTrafficLight();
             time = 0.0f;
         }
         if(time >= greenTime && !this.isRed)        //红灯时间
         {
             this.isRed = true;
+            this.lightState = WalkingLightsState.Green;
             turnTrafficLight();
-        }        
+        }
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -74,7 +82,7 @@ public class CarGuideControl : MonoBehaviour {
         }
         for(int i = 0; i<walkingLights.Count; ++i)
         {
-            walkingLights[i].GetComponent<WalkingLightsControl>().TurnTrafficLights(this.isRed);
+            walkingLights[i].GetComponent<WalkingLightsControl>().TurnTrafficLights(this.lightState);
         }
     }
 

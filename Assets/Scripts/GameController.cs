@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour {
     public Material CarRoadMat;  //车道的替换材质
     public Material StaticEnvMat;   //静物的替换材质
 
-    public GaussianBlur gaussianBlur;
+    //public GaussianBlur gaussianBlur;
+    public SaturabilityEffect saturabilityEffect;
 
     public float ChangeSaturationTime = 3.0f;
 
@@ -35,7 +36,9 @@ public class GameController : MonoBehaviour {
         gameObjectsinRoad = GameObject.FindGameObjectsWithTag("Road");
         gameObjectsinCarRoad = GameObject.FindGameObjectsWithTag("CarRoad");
         gameObjectsinStaticEnv = GameObject.FindGameObjectsWithTag("Tree");
-        gaussianBlur = CameraObject.GetComponent<GaussianBlur>();
+        //gaussianBlur = CameraObject.GetComponent<GaussianBlur>();
+        saturabilityEffect = CameraObject.GetComponent<SaturabilityEffect>();
+        saturabilityEffect.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -56,7 +59,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(RoadMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
-                gaussianBlur.BlurRadius = 2.0f;
+                //gaussianBlur.BlurRadius = 2.0f;
                 break;
             case 2:
                 //将车道地面改为BlindWorld
@@ -67,7 +70,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(CarRoadMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
-                gaussianBlur.BlurRadius = 1.6f;
+                //gaussianBlur.BlurRadius = 1.6f;
                 break;
             case 3:
                 //将静物改成BlindWorld
@@ -78,7 +81,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(StaticEnvMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
-                gaussianBlur.BlurRadius = 1.2f;
+                //gaussianBlur.BlurRadius = 1.2f;
                 break;
             case 4:
                 //将人改成BlindWorld
@@ -89,7 +92,7 @@ public class GameController : MonoBehaviour {
                     g.GetComponent<MatChange>().ChangeMat(PeopleMat);
                     g.layer = LayerMask.NameToLayer("BlindWorld");
                 }
-                gaussianBlur.BlurRadius = 0.8f;
+                //gaussianBlur.BlurRadius = 0.8f;
                 break;
             case 5:
                 //将材质球还原，挂上饱和度后处理
@@ -117,7 +120,8 @@ public class GameController : MonoBehaviour {
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
-                gaussianBlur.BlurRadius = 0.4f;
+                //gaussianBlur.BlurRadius = 0.4f;
+                saturabilityEffect.enabled = true;
                 break;
         }
     }
@@ -137,11 +141,11 @@ public class GameController : MonoBehaviour {
             m_camera.cullingMask = -1;
             m_camera.clearFlags = CameraClearFlags.Skybox;
             StartCoroutine(recoverSaturation(this.ChangeSaturationTime));
-            gaussianBlur.enabled = false;
+            //gaussianBlur.enabled = false;
 
             //触觉可视化关闭
-            lefthand.GetComponent<TouchThings>().enabled = false;
-            righthand.GetComponent<TouchThings>().enabled = false;
+            Destroy(lefthand.GetComponent<TouchThings>());
+            Destroy(righthand.GetComponent<TouchThings>());
 
             //删除RoadStep:
             GameObject[] roadSteps = GameObject.FindGameObjectsWithTag("RoadStep");
@@ -149,17 +153,23 @@ public class GameController : MonoBehaviour {
             {
                 Destroy(roadSteps[i]);
             }
+
+            //删除LaserShot
+            GameObject[] shots = GameObject.FindGameObjectsWithTag("LaserShot");
+            for (int i = 0; i < shots.Length; ++i)
+            {
+                Destroy(shots[i]);
+            }
         }
     }
 
     private IEnumerator recoverSaturation(float time)
     {
-        SaturabilityEffect effect = m_camera.GetComponent<SaturabilityEffect>();
         for(float i = 0; i<time; i+=Time.deltaTime)
         {
-            effect.saturation = Mathf.Clamp01(i * 1.0f / time);
+            saturabilityEffect.saturation = Mathf.Clamp01(i * 1.0f / time);
             yield return null;
         }
-        effect.enabled = false;
+        saturabilityEffect.enabled = false;
     }
 }

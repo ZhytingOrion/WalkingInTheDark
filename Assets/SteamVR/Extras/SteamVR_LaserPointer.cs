@@ -65,6 +65,11 @@ public class SteamVR_LaserPointer : MonoBehaviour
         pointer.GetComponent<MeshRenderer>().material = newMaterial;
 	}
 
+    public void changeColor(Color color)
+    {
+        pointer.GetComponent<MeshRenderer>().material.color = color;
+    }
+
     public virtual void OnPointerIn(PointerEventArgs e)
     {
         if (PointerIn != null)
