@@ -8,6 +8,11 @@ public class EndGame : MonoBehaviour {
     public List<GameObject> Starts = new List<GameObject>();
     public GameObject Player;
 
+    void OnEnable()
+    {
+        GameInfo.Instance.OnGameLevelChange += ResetLevel;
+    }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -23,6 +28,7 @@ public class EndGame : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (GameInfo.Instance.CntGameState != GameState.Play) return;
         //if(other.gameObject.name=="End")
         //{
         //    Destroy(other.gameObject);
@@ -33,6 +39,17 @@ public class EndGame : MonoBehaviour {
         }
     }
 
+    public void ResetLevel(int level)
+    {
+        int cntGameLevel = level;                  //移动起点终点到对应位置
+        Transform end = Ends[cntGameLevel].transform;
+        this.transform.position = end.position;
+        this.transform.rotation = end.rotation;
+        Transform start = Starts[cntGameLevel].transform;
+        Player.transform.position = start.position;
+        Player.transform.rotation = start.rotation;
+    }
+
     private void PassLevel()
     {
         GameInfo.Instance.LevelPass();
@@ -40,13 +57,6 @@ public class EndGame : MonoBehaviour {
         {
             Destroy(this.gameObject);
             return;
-        }
-        int cntGameLevel = GameInfo.Instance.CntLevel;                  //移动起点终点到对应位置
-        Transform end = Ends[cntGameLevel].transform;
-        this.transform.position = end.position;
-        this.transform.rotation = end.rotation;
-        Transform start = Starts[cntGameLevel].transform;
-        Player.transform.position = start.position;
-        Player.transform.rotation = start.rotation;
+        }        
     }
 }

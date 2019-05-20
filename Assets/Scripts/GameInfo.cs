@@ -14,6 +14,15 @@ public class GameInfo{
         }
     }
 
+    private int maxLevel = 0;     //最远到达关卡
+    public int MaxLevel
+    {
+        get
+        {
+            return maxLevel;
+        }
+    }
+
     private int cntLevel = 0;    //当前游戏关卡
     public int CntLevel
     {
@@ -30,9 +39,10 @@ public class GameInfo{
         set { cntGameState = value; }
     }
 
-    //事件 优化程序性能 监听Level和GameState的改变
+    //事件 优化程序性能 监听变量的改变
     public event System.Action<int> OnGameLevelChange;
     public event System.Action<GameState> OnGameStateChange;
+    public event System.Action<int> OnHPChange;
 
     public void LevelPass()     //通过关卡
     {
@@ -40,23 +50,35 @@ public class GameInfo{
         {
             cntGameState = GameState.Finish;
             OnGameStateChange(cntGameState);
+            this.cntLevel++;    //标记为6
         }
         else                    //进入下一关卡
         {
             cntLevel++;
             OnGameLevelChange(cntLevel);
+            this.addHP(2);
             //此处考虑将游戏设计为暂停状态，等玩家按下按键再成为Play状态。
         }
+        if (this.cntLevel > this.maxLevel) this.maxLevel = this.cntLevel;
     }
 
-    private int colliderTimes = 0;     //碰撞次数，用于复盘
-    public int ColliderTimes
+    private int hp = 10;     //碰撞次数，用于复盘
+    public int HP
     {
-        get { return colliderTimes; }
+        get { return hp; }
     }
 
-    public void AddColliderTimes()
+    public void reduceHP(int hpreduced)
     {
-        colliderTimes++;
+        hp -= hpreduced;
+        if (hp < 0) hp = 0;
+        OnHPChange(hp);
+    }
+
+    public void addHP(int hpadd)
+    {
+        hp += hpadd;
+        if (hp > 10) hp = 10;
+        OnHPChange(hp);
     }
 }

@@ -8,7 +8,7 @@ public class MatChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        m_Mat = this.GetComponent<Renderer>().material;
+        m_Mat = this.GetComponent<Renderer>().sharedMaterial;
 	}
 
     public void ChangeMat(Material mat)

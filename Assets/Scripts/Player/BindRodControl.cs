@@ -95,9 +95,10 @@ public class BindRodControl : MonoBehaviour {
     {
         //Invoke函数，表示durationTime秒后，执行StopShock函数；
         Invoke("StopShock", durationTime);
+        IsShock = true;
 
         //协程一直使得手柄产生震动，直到布尔型变量IsShock为false;
-        while (!IsShock)
+        while (IsShock)
         {
             device.TriggerHapticPulse(strength);
             yield return new WaitForEndOfFrame();
@@ -106,6 +107,6 @@ public class BindRodControl : MonoBehaviour {
 
     void StopShock()
     {
-        IsShock = true; //关闭手柄的震动
+        IsShock = false; //关闭手柄的震动
     }
 }

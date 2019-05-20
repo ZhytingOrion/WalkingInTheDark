@@ -28,9 +28,10 @@ public class GameController : MonoBehaviour {
         GameInfo.Instance.OnGameStateChange += this.GameStateChange;
     }
 
-	// Use this for initialization
-	void Start () {
-        if(CameraObject!=null)
+    // Use this for initialization
+    void Start()
+    {
+        if (CameraObject != null)
             m_camera = CameraObject.GetComponent<Camera>();
         gameObjectsinPeople = GameObject.FindGameObjectsWithTag("People");
         gameObjectsinRoad = GameObject.FindGameObjectsWithTag("Road");
@@ -39,7 +40,7 @@ public class GameController : MonoBehaviour {
         //gaussianBlur = CameraObject.GetComponent<GaussianBlur>();
         saturabilityEffect = CameraObject.GetComponent<SaturabilityEffect>();
         saturabilityEffect.enabled = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -52,46 +53,50 @@ public class GameController : MonoBehaviour {
         {
             case 1:
                 //将人行道layer改为BlindWorld
-                for(int i = 0; i<gameObjectsinRoad.Length; ++i)
-                {
-                    GameObject g = gameObjectsinRoad[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.GetComponent<MatChange>().ChangeMat(RoadMat);
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                }
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                //for (int i = 0; i<gameObjectsinRoad.Length; ++i)
+                //{
+                //    GameObject g = gameObjectsinRoad[i];
+                //    if (g.GetComponent<MatChange>() == null) continue;
+                //    g.GetComponent<MatChange>().ChangeMat(RoadMat);
+                //    g.layer = LayerMask.NameToLayer("BlindWorld");
+                //}
                 //gaussianBlur.BlurRadius = 2.0f;
                 break;
             case 2:
                 //将车道地面改为BlindWorld
-                for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
-                {
-                    GameObject g = gameObjectsinCarRoad[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.GetComponent<MatChange>().ChangeMat(CarRoadMat);
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                }
+                GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
+                //for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
+                //{
+                //    GameObject g = gameObjectsinCarRoad[i];
+                //    if (g.GetComponent<MatChange>() == null) continue;
+                //    g.GetComponent<MatChange>().ChangeMat(CarRoadMat);
+                //    g.layer = LayerMask.NameToLayer("BlindWorld");
+                //}
                 //gaussianBlur.BlurRadius = 1.6f;
                 break;
             case 3:
                 //将静物改成BlindWorld
-                for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
-                {
-                    GameObject g = gameObjectsinStaticEnv[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.GetComponent<MatChange>().ChangeMat(StaticEnvMat);
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                }
+                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
+                //for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
+                //{
+                //    GameObject g = gameObjectsinStaticEnv[i];
+                //    if (g.GetComponent<MatChange>() == null) continue;
+                //    g.GetComponent<MatChange>().ChangeMat(StaticEnvMat);
+                //    g.layer = LayerMask.NameToLayer("BlindWorld");
+                //}
                 //gaussianBlur.BlurRadius = 1.2f;
                 break;
             case 4:
                 //将人改成BlindWorld
-                for (int i = 0; i < gameObjectsinPeople.Length; ++i)
-                {
-                    GameObject g = gameObjectsinPeople[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.GetComponent<MatChange>().ChangeMat(PeopleMat);
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                }
+                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                //for (int i = 0; i < gameObjectsinPeople.Length; ++i)
+                //{
+                //    GameObject g = gameObjectsinPeople[i];
+                //    if (g.GetComponent<MatChange>() == null) continue;
+                //    g.GetComponent<MatChange>().ChangeMat(PeopleMat);
+                //    g.layer = LayerMask.NameToLayer("BlindWorld");
+                //}
                 //gaussianBlur.BlurRadius = 0.8f;
                 break;
             case 5:
@@ -122,6 +127,76 @@ public class GameController : MonoBehaviour {
                 }
                 //gaussianBlur.BlurRadius = 0.4f;
                 saturabilityEffect.enabled = true;
+                break;
+        }
+    }
+
+    private void GameObjRender(List<GameObject> objs, Material mat)
+    {
+        for (int i = 0; i < objs.Count; ++i)
+        {
+            GameObject g = objs[i];
+            if (g.GetComponent<MatChange>() == null) continue;
+            g.GetComponent<MatChange>().ChangeMat(mat);
+            g.layer = LayerMask.NameToLayer("BlindWorld");
+        }
+    }
+
+    public void ResetLevel(int level)      //重新载入游戏的时候根据关卡渲染对应画面
+    {
+        switch(level)
+        {
+            case 1:
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                break;
+            case 2:
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
+                break;
+            case 3:
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
+                break;
+            case 4:
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
+                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                break;
+            case 5:
+                for (int i = 0; i < gameObjectsinRoad.Length; ++i)
+                {
+                    GameObject g = gameObjectsinRoad[i];
+                    if (g.GetComponent<MatChange>() == null) continue;
+                    g.layer = LayerMask.NameToLayer("BlindWorld");
+
+                }
+                for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
+                {
+                    GameObject g = gameObjectsinCarRoad[i];
+                    if (g.GetComponent<MatChange>() == null) continue;
+                    g.layer = LayerMask.NameToLayer("BlindWorld");
+                }
+                for (int i = 0; i < gameObjectsinPeople.Length; ++i)
+                {
+                    GameObject g = gameObjectsinPeople[i];
+                    if (g.GetComponent<MatChange>() == null) continue;
+                    g.layer = LayerMask.NameToLayer("BlindWorld");
+                }
+                for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
+                {
+                    GameObject g = gameObjectsinStaticEnv[i];
+                    if (g.GetComponent<MatChange>() == null) continue;
+                    g.layer = LayerMask.NameToLayer("BlindWorld");
+                }
+                saturabilityEffect.enabled = true;
+                break;
+            case 6:
+                saturabilityEffect.enabled = true;
+                GameStateChange(GameState.Finish);
+                break;
+            default:
                 break;
         }
     }

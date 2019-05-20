@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\DataBasic.cs" />
+     <Compile Include="Assets\Scripts\DataRecord.cs" />
      <Compile Include="Assets\Scripts\Dynamics\CarControl.cs" />
      <Compile Include="Assets\Scripts\Dynamics\CarGuideControl.cs" />
      <Compile Include="Assets\Scripts\Dynamics\CarMove.cs" />
@@ -61,20 +62,25 @@
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameInfo.cs" />
+     <Compile Include="Assets\Scripts\Main\ButtonChoose.cs" />
+     <Compile Include="Assets\Scripts\Main\CheckInfo.cs" />
      <Compile Include="Assets\Scripts\MatChange.cs" />
      <Compile Include="Assets\Scripts\Player\BindRodControl.cs" />
      <Compile Include="Assets\Scripts\Player\CameraMove.cs" />
+     <Compile Include="Assets\Scripts\Player\HPRenders.cs" />
      <Compile Include="Assets\Scripts\Player\LaserShoot.cs" />
      <Compile Include="Assets\Scripts\Player\MovableChiars.cs" />
      <Compile Include="Assets\Scripts\Player\MoveAcrossThings.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Player\TouchThings.cs" />
+     <Compile Include="Assets\Scripts\Player\TouchUI.cs" />
      <Compile Include="Assets\Scripts\Player\TouchVisualizable.cs" />
      <Compile Include="Assets\Scripts\Player\TouchVisualizeInfo.cs" />
      <Compile Include="Assets\Scripts\Shader\GaussianBlur.cs" />
      <Compile Include="Assets\Scripts\Shader\PostEffectBase.cs" />
      <Compile Include="Assets\Scripts\Shader\SaturabilityEffect.cs" />
+     <Compile Include="Assets\Scripts\StoreVoice.cs" />
      <Compile Include="Assets\Scripts\WalkingLightsControl.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
@@ -188,9 +194,10 @@
      <None Include="Assets\Resources\Arts\Mats\OutlineShader.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\Highlight.shader" />
+     <None Include="Assets\Resources\Arts\Mats\PureMat\PureShaderWithShadow.shader" />
      <None Include="Assets\SteamVR\Mats\GuideRoadDarkView.shader" />
      <None Include="Assets\SteamVR\Mats\BlindShader.shader" />
-     <None Include="Assets\Resources\Arts\Mats\BlindShader.shader" />
+     <None Include="Assets\Resources\Arts\Mats\PureMat\BlindShader.shader" />
      <None Include="Assets\Scripts\Shader\SaturabilityShader.shader" />
      <None Include="Assets\Resources\Arts\Mats\BlindShader_Ground.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />

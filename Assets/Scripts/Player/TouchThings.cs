@@ -18,12 +18,15 @@ public class TouchThings : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (GameInfo.Instance.CntGameState != GameState.Play) return;   //游戏结束、暂停的情况下不能操作
+
         GameObject collider = collision.gameObject;
 
         if (collider.layer == BlindWorldLayer)
         {
             return;     //可见的情况就不需要触摸轮廓了
         }
+        if (collision.tag == "GuideRoad") return;
 
         Renderer[] renderers = collider.transform.GetComponentsInChildren<Renderer>(false);
 

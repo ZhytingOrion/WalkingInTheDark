@@ -29,36 +29,53 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Car")
+        if (GameInfo.Instance.CntGameState != GameState.Play) return;   //游戏结束、暂停的情况下不能操作
+
+        switch (other.gameObject.tag)
         {
-            this.GetComponent<AudioSource>().Play();
-            Debug.Log("Die");
-        }
-        else if (other.tag == "GuideRoad")
-        {
-            other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
-        }
-        else if (other.tag == "RoadStep")
-        {
-            GameObject step = other.transform.Find("Step").gameObject;
-            switch (JudgePlayerDirection())                                 //根据玩家行动的方向，调整脚印的方向。由于Environment有Y轴Rotation为-90，故此处都-90，也可以用LocalRotation
-            {
-                case Direction.left:
-                    step.transform.rotation = Quaternion.Euler(90, -90, 0);
-                    break;
-                case Direction.right:
-                    step.transform.rotation = Quaternion.Euler(90, 90, 0);
-                    break;
-                case Direction.up:
-                    step.transform.rotation = Quaternion.Euler(90, 0, 0);
-                    break;
-                case Direction.down:
-                    step.transform.rotation = Quaternion.Euler(90, 180, 0);
-                    break;
-                default:
-                    break;
-            }
-            step.SetActive(true);
+            case "Car":
+                this.GetComponent<AudioSource>().Play();
+                GameInfo.Instance.reduceHP(2);
+                Debug.Log("Die");
+                break;
+            case "People":
+                GameInfo.Instance.reduceHP(1);
+                break;
+            case "Tree":
+                GameInfo.Instance.reduceHP(1);
+                break;
+            case "Wall":
+                GameInfo.Instance.reduceHP(1);
+                break;
+            case "WalkingLights":
+                GameInfo.Instance.reduceHP(1);
+                break;
+            case "GuideRoad":
+                other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
+                break;
+            case "RoadStep":
+                GameObject step = other.transform.Find("Step").gameObject;
+                switch (JudgePlayerDirection())                                 //根据玩家行动的方向，调整脚印的方向。由于Environment有Y轴Rotation为-90，故此处都-90，也可以用LocalRotation
+                {
+                    case Direction.left:
+                        step.transform.rotation = Quaternion.Euler(90, -90, 0);
+                        break;
+                    case Direction.right:
+                        step.transform.rotation = Quaternion.Euler(90, 90, 0);
+                        break;
+                    case Direction.up:
+                        step.transform.rotation = Quaternion.Euler(90, 0, 0);
+                        break;
+                    case Direction.down:
+                        step.transform.rotation = Quaternion.Euler(90, 180, 0);
+                        break;
+                    default:
+                        break;
+                }
+                step.SetActive(true);
+                break;
+            default:
+                break;
         }
     }
 

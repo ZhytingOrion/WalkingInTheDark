@@ -76,7 +76,7 @@ public class CarGuideControl : MonoBehaviour {
 
     private void turnTrafficLight()
     {
-        if(this.Car!=null)
+        if(this.Car!=null && !this.isRed)
         {
             this.Car.GetComponent<CarControl>().isTrafficLightRed(this.isRed);
         }
