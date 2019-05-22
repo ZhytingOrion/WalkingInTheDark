@@ -48,7 +48,8 @@ public class TouchThings : MonoBehaviour
         Renderer[] renderers = collider.transform.GetComponentsInChildren<Renderer>(false);
 
         for (int i = 0; i < renderers.Length; ++i)
-        {            
+        {
+            if (renderers[i].sharedMaterial != outlineMat) continue;
             if (originMats.ContainsKey(renderers[i].gameObject))
             {
                 renderers[i].sharedMaterial = originMats[renderers[i].gameObject];

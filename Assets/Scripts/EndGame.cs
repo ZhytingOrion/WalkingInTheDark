@@ -41,6 +41,7 @@ public class EndGame : MonoBehaviour {
 
     public void ResetLevel(int level)
     {
+        if (GameInfo.Instance.CntGameState == GameState.Finish) return;
         int cntGameLevel = level;                  //移动起点终点到对应位置
         Transform end = Ends[cntGameLevel].transform;
         this.transform.position = end.position;
@@ -59,4 +60,5 @@ public class EndGame : MonoBehaviour {
             return;
         }        
     }
+    
 }

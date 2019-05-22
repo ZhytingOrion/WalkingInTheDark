@@ -112,15 +112,15 @@ public class LaserShoot : MonoBehaviour
             Transform laserFlag = target.transform.Find("LaserFlag(Clone)");
             if (laserFlag != null)  //已经有标记了
             {
-                laserFlag.GetComponent<Renderer>().material.color = m_color;
+                laserFlag.GetComponent<LaserFlagControl>().ChangeColor(m_color);
                 return;
             }
 
             GameObject flag = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LaserFlag"));
             flag.transform.parent = target.transform;
-            flag.transform.localPosition = Vector3.zero;
+            flag.transform.position = new Vector3(target.transform.position.x, 0.1f, target.transform.position.z);
             flag.layer = LayerMask.NameToLayer("BlindWorld");
-            flag.GetComponent<Renderer>().material.color = m_color;
+            flag.GetComponent<LaserFlagControl>().ChangeColor(m_color);
         }
     }
 

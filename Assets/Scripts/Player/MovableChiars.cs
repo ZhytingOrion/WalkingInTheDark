@@ -24,7 +24,7 @@ public class MovableChiars : MonoBehaviour
         if (trackedObject)
         {
             var device = SteamVR_Controller.Input((int)trackedObject.index);
-            if (device.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
+            if (device.GetPress(SteamVR_Controller.ButtonMask.Touchpad) && GameInfo.Instance.CntGameState != GameState.Guide)
             {
                 Vector2 cc = device.GetAxis();
                 float angle = VectorAngle(new Vector2(1, 0), cc); //调用角度计算公式           

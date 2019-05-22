@@ -52,6 +52,10 @@ public class PlayerControl : MonoBehaviour {
                 break;
             case "GuideRoad":
                 other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
+                for(int i = 0; i<other.transform.childCount; ++i)
+                {
+                    other.transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("BlindWorld");
+                }
                 break;
             case "RoadStep":
                 GameObject step = other.transform.Find("Step").gameObject;

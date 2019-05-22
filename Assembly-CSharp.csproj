@@ -58,10 +58,12 @@
      <Compile Include="Assets\Scripts\Dynamics\CarControl.cs" />
      <Compile Include="Assets\Scripts\Dynamics\CarGuideControl.cs" />
      <Compile Include="Assets\Scripts\Dynamics\CarMove.cs" />
+     <Compile Include="Assets\Scripts\Dynamics\DynamicsControl.cs" />
      <Compile Include="Assets\Scripts\Dynamics\PeopleControl.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameInfo.cs" />
+     <Compile Include="Assets\Scripts\LaserFlagControl.cs" />
      <Compile Include="Assets\Scripts\Main\ButtonChoose.cs" />
      <Compile Include="Assets\Scripts\Main\CheckInfo.cs" />
      <Compile Include="Assets\Scripts\MatChange.cs" />
@@ -73,6 +75,7 @@
      <Compile Include="Assets\Scripts\Player\MoveAcrossThings.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Player\PlotControl.cs" />
      <Compile Include="Assets\Scripts\Player\TouchThings.cs" />
      <Compile Include="Assets\Scripts\Player\TouchUI.cs" />
      <Compile Include="Assets\Scripts\Player\TouchVisualizable.cs" />
@@ -196,6 +199,8 @@
      <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\Highlight.shader" />
      <None Include="Assets\Resources\Arts\Mats\PureMat\PureShaderWithShadow.shader" />
      <None Include="Assets\SteamVR\Mats\GuideRoadDarkView.shader" />
+     <None Include="Assets\Toon Vehicles\ToonShading\Shaders\ToonLitOutline.shader" />
+     <None Include="Assets\Toon Vehicles\ToonShading\Shaders\ToonLit.shader" />
      <None Include="Assets\SteamVR\Mats\BlindShader.shader" />
      <None Include="Assets\Resources\Arts\Mats\PureMat\BlindShader.shader" />
      <None Include="Assets\Scripts\Shader\SaturabilityShader.shader" />

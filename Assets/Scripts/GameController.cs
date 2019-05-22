@@ -170,6 +170,8 @@ public class GameController : MonoBehaviour {
                     GameObject g = gameObjectsinRoad[i];
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.layer = LayerMask.NameToLayer("BlindWorld");
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
 
                 }
                 for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
@@ -177,18 +179,24 @@ public class GameController : MonoBehaviour {
                     GameObject g = gameObjectsinCarRoad[i];
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.layer = LayerMask.NameToLayer("BlindWorld");
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                 }
                 for (int i = 0; i < gameObjectsinPeople.Length; ++i)
                 {
                     GameObject g = gameObjectsinPeople[i];
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.layer = LayerMask.NameToLayer("BlindWorld");
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                 }
                 for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
                 {
                     GameObject g = gameObjectsinStaticEnv[i];
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.layer = LayerMask.NameToLayer("BlindWorld");
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                 }
                 saturabilityEffect.enabled = true;
                 break;

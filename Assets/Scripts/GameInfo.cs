@@ -50,19 +50,20 @@ public class GameInfo{
         {
             cntGameState = GameState.Finish;
             OnGameStateChange(cntGameState);
-            this.cntLevel++;    //标记为6
         }
         else                    //进入下一关卡
         {
-            cntLevel++;
-            OnGameLevelChange(cntLevel);
             this.addHP(2);
             //此处考虑将游戏设计为暂停状态，等玩家按下按键再成为Play状态。
         }
+
+        cntLevel++;
         if (this.cntLevel > this.maxLevel) this.maxLevel = this.cntLevel;
+
+        OnGameLevelChange(cntLevel);
     }
 
-    private int hp = 10;     //碰撞次数，用于复盘
+    private int hp = 5;     //碰撞次数，用于复盘
     public int HP
     {
         get { return hp; }
@@ -73,6 +74,13 @@ public class GameInfo{
         hp -= hpreduced;
         if (hp < 0) hp = 0;
         OnHPChange(hp);
+        
+        if (hp == 0)  //死亡
+        {
+            this.cntLevel = 0;
+            OnGameLevelChange(this.cntLevel);
+            addHP(5);
+        }
     }
 
     public void addHP(int hpadd)
