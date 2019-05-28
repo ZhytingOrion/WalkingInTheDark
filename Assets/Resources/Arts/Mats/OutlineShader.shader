@@ -9,51 +9,17 @@
 	{
 		Tags { "RenderType"="Opaque" }
 		LOD 100
-
-		//考虑第一步colormask 0，zwrite on 写深度
-		//第二步扩展法线，写颜色
 		
-		Pass
+		Pass   //不写颜色仅写正面的深度
 		{
 			Cull Back
 			ZWrite On
-			ColorMask 0
-
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-
-			#include "UnityCG.cginc"
-
-			struct appdata
-			{
-				float4 vertex : POSITION;
-			};
-
-			struct v2f
-			{
-				float4 vertex : SV_POSITION;
-			};
-
-			v2f vert(appdata v)
-			{
-				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				return o;
-			}
-
-			fixed4 frag(v2f i) : SV_Target
-			{
-				fixed4 col = fixed4(0,0,0,0);
-				return col;
-			}
-			ENDCG
+			ColorMask 0			
 		}
 
-		Pass
+		Pass  //剔除正面，将背面的点向法线方向扩展一点再渲染
 		{
 			Cull Front
-			Blend SrcAlpha DstAlpha
 
 			CGPROGRAM
 			#pragma vertex vert

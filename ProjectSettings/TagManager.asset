@@ -15,6 +15,10 @@ TagManager:
   - WalkingLights
   - LaserShot
   - Wall
+  - GuideRoadDot
+  - Bicycle
+  - Store
+  - Fencing
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class PeopleControl : MonoBehaviour
     private float changeObjDistance = 0.5f;
     private Quaternion rawRotation;
     private Quaternion lookAtRotation;
+    private bool isAvoiding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,78 @@ public class PeopleControl : MonoBehaviour
             }
             StartCoroutine(turnAround());
         }
+        if(!isAvoiding)
+        {
+            StartCoroutine(AvoidSomething());
+        }
+    }
+
+    private void JudgeAvoid()
+    {
+        while (!isAvoiding)
+        {
+            StartCoroutine(AvoidSomething());
+        }
+    }
+
+    private IEnumerator AvoidSomething()
+    {
+        this.isAvoiding = true;
+        Vector3 origin = this.transform.position + this.transform.up * 0.5f;
+        Ray ray = new Ray(origin, this.transform.forward);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, 1.5f))    //判断前方一米五路况
+        {
+            //前方有障碍物，转弯 --> 人向右走，则先判断可否向右躲避障碍物，反之同理。目的：尽量避免走到车道上。
+
+            float peopleDirection = Quaternion.ToEulerAngles(this.transform.localRotation).y;
+            if ((peopleDirection < 0 && peopleDirection > -180)  || (peopleDirection > 180 && peopleDirection < 360))
+            {
+
+                Ray rayLeft = new Ray(origin, -this.transform.right);
+                if (Physics.Raycast(rayLeft, out hitInfo, 0.5f))    //左边0.5米内是否有障碍物
+                {
+                    Ray rayRight = new Ray(origin, this.transform.right);
+                    if (Physics.Raycast(rayRight, out hitInfo, 0.5f))    //右边0.5米内是否有障碍物
+                    { }
+                    else
+                    {
+                        //向右转弯
+                        yield return turnAround(90);
+                        yield return turnAround();
+                    }
+                }
+                else
+                {
+                    //向左转弯
+                    yield return turnAround(-90);
+                    yield return turnAround();
+                }
+            }
+            else    //向右方向走，因此先考虑右转避开障碍物
+            {
+                Ray rayRight = new Ray(origin, this.transform.right);
+                if (Physics.Raycast(rayRight, out hitInfo, 0.5f))    //右边0.5米内是否有障碍物
+                {
+                    Ray rayLeft = new Ray(origin, -this.transform.right);
+                    if (Physics.Raycast(rayLeft, out hitInfo, 0.5f))    //左边0.5米内是否有障碍物
+                    { }
+                    else
+                    {
+                        //向右转弯
+                        yield return turnAround(-90);
+                        yield return turnAround();
+                    }
+                }
+                else
+                {
+                    //向左转弯
+                    yield return turnAround(90);
+                    yield return turnAround();
+                }
+            }
+        }
+        this.isAvoiding = false;
     }
 
     private IEnumerator turnAround()
@@ -60,7 +133,7 @@ public class PeopleControl : MonoBehaviour
         Quaternion dest = this.transform.rotation;
         this.transform.rotation = raw;
 
-        float lerpSpeed = rotateSpeed / angle;
+        float lerpSpeed = rotateSpeed / Mathf.Abs(angle);
 
         for (float lerp = 0.0f; lerp < 1.0f; lerp += lerpSpeed * Time.deltaTime)
         {

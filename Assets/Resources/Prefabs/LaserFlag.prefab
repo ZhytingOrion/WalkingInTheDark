@@ -144,6 +144,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 5285764003702885095, guid: e64208511a09d344ab6790a4e9357ebf,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285764003702885095, guid: e64208511a09d344ab6790a4e9357ebf,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5285764003689026437, guid: e64208511a09d344ab6790a4e9357ebf,
         type: 3}
       propertyPath: m_Layer
@@ -270,6 +280,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 4884708066315771840, guid: e13936582447c5d4d8d78d91bb6d790c,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884708066315771840, guid: e13936582447c5d4d8d78d91bb6d790c,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13936582447c5d4d8d78d91bb6d790c, type: 3}
 --- !u!1 &2333061456172563137 stripped
@@ -375,6 +395,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236964493082670945, guid: 527e1970859916d42ac7af29b4f02a48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236964493098036737, guid: 527e1970859916d42ac7af29b4f02a48,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4236964493082670947, guid: 527e1970859916d42ac7af29b4f02a48,
         type: 3}
@@ -491,6 +521,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417321443616549246, guid: 584ace6f1fcad1142b1f6c90742807a2,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417321443616549246, guid: 584ace6f1fcad1142b1f6c90742807a2,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8417321443601510428, guid: 584ace6f1fcad1142b1f6c90742807a2,
         type: 3}

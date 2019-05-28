@@ -8,23 +8,63 @@ public class PlayerControl : MonoBehaviour {
     private Vector3 newLoc;
     public GameObject HeadObject;
     private Vector3 oldHeadPos;
+    public Camera m_camera;
+    private bool isHit = false;
+    int cntCullingMask;
+    Color cntColor;
+    private AudioSource m_audioSource;
+    [Header("撞倒东西的音效")]
+    public List<AudioClip> clips = new List<AudioClip>();
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         newLoc = this.transform.position;
         oldHeadPos = HeadObject.transform.localPosition;
-	}
+        cntCullingMask = m_camera.cullingMask;   //记录
+        cntColor = m_camera.backgroundColor;
+        m_audioSource = this.GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         lastLoc = newLoc;
         newLoc = this.transform.position;
-        //oldHeadPos = HeadObject.transform.localPosition;
+        if (!isHit)
+            oldHeadPos = HeadObject.transform.localPosition;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //HeadObject.transform.localPosition = this.oldHeadPos;
+        //if(isHit)
+            //HeadObject.transform.localPosition = this.oldHeadPos;
+    }
+
+    private void hitSomething(int reduceHP)
+    {
+        if (GameInfo.Instance.CntGameState != GameState.Play) return;
+        isHit = true;
+        int index = Random.Range(0, clips.Count);
+        m_audioSource.clip = clips[index];
+        m_audioSource.Play();
+        GameInfo.Instance.reduceHP(reduceHP);
+        //StartCoroutine(HitSomethingRender(1.0f));
+
+    }
+
+    private IEnumerator HitSomethingRender(float time)
+    {
+        int cntCullingMask = m_camera.cullingMask;   //记录
+        Color cntColor = m_camera.backgroundColor;   
+        m_camera.cullingMask = 0;                    //Nothing
+        m_camera.backgroundColor = Color.white;
+        yield return new WaitForSeconds(time);
+        m_camera.cullingMask = cntCullingMask;       //复原
+        m_camera.backgroundColor = cntColor;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isHit = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,23 +74,37 @@ public class PlayerControl : MonoBehaviour {
         switch (other.gameObject.tag)
         {
             case "Car":
-                this.GetComponent<AudioSource>().Play();
-                GameInfo.Instance.reduceHP(2);
-                Debug.Log("Die");
+                hitSomething(2);
                 break;
             case "People":
-                GameInfo.Instance.reduceHP(1);
+                //hitSomething(1);
                 break;
             case "Tree":
-                GameInfo.Instance.reduceHP(1);
+                hitSomething(1);
                 break;
             case "Wall":
-                GameInfo.Instance.reduceHP(1);
+                hitSomething(1);
+                break;
+            case "Store":
+                hitSomething(1);
+                break;
+            case "Bicycle":
+                hitSomething(1);
+                break;
+            case "Fencing":
+                hitSomething(1);
                 break;
             case "WalkingLights":
-                GameInfo.Instance.reduceHP(1);
+                hitSomething(1);
                 break;
             case "GuideRoad":
+                other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
+                for(int i = 0; i<other.transform.childCount; ++i)
+                {
+                    other.transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("BlindWorld");
+                }
+                break;
+            case "GuideRoadDot":
                 other.gameObject.layer = LayerMask.NameToLayer("BlindWorld");
                 for(int i = 0; i<other.transform.childCount; ++i)
                 {

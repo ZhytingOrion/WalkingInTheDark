@@ -10,12 +10,14 @@ public class GameController : MonoBehaviour {
     private GameObject[] gameObjectsinPeople;     //所有标签为people的对象
     private GameObject[] gameObjectsinRoad;     //所有标签为Road的对象
     private GameObject[] gameObjectsinCarRoad;     //所有标签为CarRoad的对象
-    private GameObject[] gameObjectsinStaticEnv;     //所有标签为静物的对象
+    private GameObject[] gameObjectsinTree;     //所有标签为Tree的对象
+    private GameObject[] gameObjectsinWalkingLights;     //所有标签为WalkingLights的对象
 
     public Material PeopleMat;  //人物的替换材质
     public Material RoadMat;  //人行道的替换材质
     public Material CarRoadMat;  //车道的替换材质
-    public Material StaticEnvMat;   //静物的替换材质
+    public Material TreeMat;   //树的替换材质
+    public Material WalkingLightsMat;   //红绿灯的替换材质
 
     //public GaussianBlur gaussianBlur;
     public SaturabilityEffect saturabilityEffect;
@@ -36,7 +38,8 @@ public class GameController : MonoBehaviour {
         gameObjectsinPeople = GameObject.FindGameObjectsWithTag("People");
         gameObjectsinRoad = GameObject.FindGameObjectsWithTag("Road");
         gameObjectsinCarRoad = GameObject.FindGameObjectsWithTag("CarRoad");
-        gameObjectsinStaticEnv = GameObject.FindGameObjectsWithTag("Tree");
+        gameObjectsinTree = GameObject.FindGameObjectsWithTag("Tree");
+        gameObjectsinWalkingLights = GameObject.FindGameObjectsWithTag("WalkingLights");
         //gaussianBlur = CameraObject.GetComponent<GaussianBlur>();
         saturabilityEffect = CameraObject.GetComponent<SaturabilityEffect>();
         saturabilityEffect.enabled = false;
@@ -77,7 +80,7 @@ public class GameController : MonoBehaviour {
                 break;
             case 3:
                 //将静物改成BlindWorld
-                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
+                GameObjRender(new List<GameObject>(gameObjectsinWalkingLights), WalkingLightsMat);
                 //for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
                 //{
                 //    GameObject g = gameObjectsinStaticEnv[i];
@@ -89,7 +92,7 @@ public class GameController : MonoBehaviour {
                 break;
             case 4:
                 //将人改成BlindWorld
-                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                GameObjRender(new List<GameObject>(gameObjectsinTree), TreeMat);
                 //for (int i = 0; i < gameObjectsinPeople.Length; ++i)
                 //{
                 //    GameObject g = gameObjectsinPeople[i];
@@ -100,33 +103,64 @@ public class GameController : MonoBehaviour {
                 //gaussianBlur.BlurRadius = 0.8f;
                 break;
             case 5:
+                //将人改成BlindWorld
+                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                //for (int i = 0; i < gameObjectsinPeople.Length; ++i)
+                //{
+                //    GameObject g = gameObjectsinPeople[i];
+                //    if (g.GetComponent<MatChange>() == null) continue;
+                //    g.GetComponent<MatChange>().ChangeMat(PeopleMat);
+                //    g.layer = LayerMask.NameToLayer("BlindWorld");
+                //}
+                //gaussianBlur.BlurRadius = 0.8f;
+                break;
+            case 6:
                 //将材质球还原，挂上饱和度后处理
                 for(int i = 0; i<gameObjectsinRoad.Length; ++i)
                 {
                     GameObject g = gameObjectsinRoad[i];
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
                 for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
                 {
                     GameObject g = gameObjectsinCarRoad[i];
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
                 for (int i = 0; i < gameObjectsinPeople.Length; ++i)
                 {
                     GameObject g = gameObjectsinPeople[i];
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
-                for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
+                for (int i = 0; i < gameObjectsinTree.Length; ++i)
                 {
-                    GameObject g = gameObjectsinStaticEnv[i];
+                    GameObject g = gameObjectsinTree[i];
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
+                    if (g.GetComponent<MatChange>() == null) continue;
+                    g.GetComponent<MatChange>().RecoverMat();
+                }
+                for (int i = 0; i < gameObjectsinWalkingLights.Length; ++i)
+                {
+                    GameObject g = gameObjectsinWalkingLights[i];
+                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+                    if (lasershot != null) Destroy(lasershot.gameObject);
                     if (g.GetComponent<MatChange>() == null) continue;
                     g.GetComponent<MatChange>().RecoverMat();
                 }
                 //gaussianBlur.BlurRadius = 0.4f;
                 saturabilityEffect.enabled = true;
+
+                GameInfo.Instance.FinishGame();
+
                 break;
         }
     }
@@ -136,6 +170,8 @@ public class GameController : MonoBehaviour {
         for (int i = 0; i < objs.Count; ++i)
         {
             GameObject g = objs[i];
+            Transform lasershot = g.transform.Find("LaserFlag(Clone)");
+            if (lasershot != null) Destroy(lasershot.gameObject);
             if (g.GetComponent<MatChange>() == null) continue;
             g.GetComponent<MatChange>().ChangeMat(mat);
             g.layer = LayerMask.NameToLayer("BlindWorld");
@@ -156,53 +192,25 @@ public class GameController : MonoBehaviour {
             case 3:
                 GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
                 GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
-                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
+                GameObjRender(new List<GameObject>(gameObjectsinWalkingLights), WalkingLightsMat);
                 break;
             case 4:
                 GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
                 GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
-                GameObjRender(new List<GameObject>(gameObjectsinStaticEnv), StaticEnvMat);
-                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                GameObjRender(new List<GameObject>(gameObjectsinTree), TreeMat);
+                GameObjRender(new List<GameObject>(gameObjectsinWalkingLights), WalkingLightsMat);
                 break;
             case 5:
-                for (int i = 0; i < gameObjectsinRoad.Length; ++i)
-                {
-                    GameObject g = gameObjectsinRoad[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
-                    if (lasershot != null) Destroy(lasershot.gameObject);
-
-                }
-                for (int i = 0; i < gameObjectsinCarRoad.Length; ++i)
-                {
-                    GameObject g = gameObjectsinCarRoad[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
-                    if (lasershot != null) Destroy(lasershot.gameObject);
-                }
-                for (int i = 0; i < gameObjectsinPeople.Length; ++i)
-                {
-                    GameObject g = gameObjectsinPeople[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
-                    if (lasershot != null) Destroy(lasershot.gameObject);
-                }
-                for (int i = 0; i < gameObjectsinStaticEnv.Length; ++i)
-                {
-                    GameObject g = gameObjectsinStaticEnv[i];
-                    if (g.GetComponent<MatChange>() == null) continue;
-                    g.layer = LayerMask.NameToLayer("BlindWorld");
-                    Transform lasershot = g.transform.Find("LaserFlag(Clone)");
-                    if (lasershot != null) Destroy(lasershot.gameObject);
-                }
-                saturabilityEffect.enabled = true;
+                GameObjRender(new List<GameObject>(gameObjectsinRoad), RoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinCarRoad), CarRoadMat);
+                GameObjRender(new List<GameObject>(gameObjectsinTree), TreeMat);
+                GameObjRender(new List<GameObject>(gameObjectsinPeople), PeopleMat);
+                GameObjRender(new List<GameObject>(gameObjectsinWalkingLights), WalkingLightsMat);
                 break;
             case 6:
+               
                 saturabilityEffect.enabled = true;
-                GameStateChange(GameState.Finish);
+                GameInfo.Instance.FinishGame();
                 break;
             default:
                 break;

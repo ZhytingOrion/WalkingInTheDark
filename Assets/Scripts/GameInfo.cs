@@ -48,8 +48,7 @@ public class GameInfo{
     {
         if(this.cntLevel == 5)  //通过所有关卡，游戏结束0
         {
-            cntGameState = GameState.Finish;
-            OnGameStateChange(cntGameState);
+            //Finish Game
         }
         else                    //进入下一关卡
         {
@@ -61,6 +60,12 @@ public class GameInfo{
         if (this.cntLevel > this.maxLevel) this.maxLevel = this.cntLevel;
 
         OnGameLevelChange(cntLevel);
+    }
+
+    public void FinishGame()
+    {
+        cntGameState = GameState.Finish;
+        OnGameStateChange(cntGameState);
     }
 
     private int hp = 5;     //碰撞次数，用于复盘

@@ -17,6 +17,10 @@ public class BindRodControl : MonoBehaviour {
     SteamVR_TrackedObject Hand;
     SteamVR_Controller.Device device;
 
+    public GameObject KnockVoice;
+    private AudioSource knock_audioSource;
+    private GameObject knockVoicePos;
+
     bool IsShock = false;  //布尔型变量IsShock
 
     public List<KnockInfo> knockInfos = new List<KnockInfo>();
@@ -28,6 +32,8 @@ public class BindRodControl : MonoBehaviour {
         {
             knockInfoDic.Add(knockInfos[i].ObjectTag, knockInfos[i]);
         }
+        knock_audioSource = KnockVoice.GetComponent<AudioSource>();
+        knockVoicePos = this.transform.Find("KnockVoicePlace").gameObject;
     }
 
     // Use this for initialization
@@ -74,12 +80,16 @@ public class BindRodControl : MonoBehaviour {
         knockInfoDic.TryGetValue(tag, out knockInfo);
         if(knockInfo != null)
         {
-            AudioSource audioSource = collision.gameObject.GetComponent<AudioSource>();
-            if(audioSource != null)
-            {
-                audioSource.clip = knockInfo.knockSound;
-                audioSource.Play();
-            }
+            if (knock_audioSource.isPlaying) knock_audioSource.Stop();
+            KnockVoice.transform.position = this.knockVoicePos.transform.position;
+            knock_audioSource.clip = knockInfo.knockSound;
+            knock_audioSource.Play();
+            //AudioSource audioSource = collision.gameObject.GetComponent<AudioSource>();
+            //if(audioSource != null)
+            //{
+            //    audioSource.clip = knockInfo.knockSound;
+            //    audioSource.Play();
+            //}
             StartCoroutine(Shock(knockInfo.knockShakeTime, (ushort)knockInfo.knockShakeStrength));
         }
         else StartCoroutine(Shock(0.5f, 500));

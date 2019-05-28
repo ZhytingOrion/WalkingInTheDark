@@ -120,19 +120,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3513690447b6c4288713c376da5d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuPlane: {fileID: 0}
   player: {fileID: 420908}
   dic: {fileID: 4692978903626320}
   speed: 1
   colorList:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.5019608, b: 1, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92, b: 0.016, a: 1}
   tagsCanBeShot:
   - People
   - Tree
   - Car
   - WalkingLights
+  - Wall
+  - Store
+  - Bicycle
+  - Fencing
 --- !u!114 &114051334127600146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +851,8 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.015, z: 0.44}
   m_LocalScale: {x: 1.3, y: 61.30003, z: 1.3000004}
-  m_Children: []
+  m_Children:
+  - {fileID: 3424987188042360692}
   m_Father: {fileID: 402434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -936,19 +942,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9293a92cd715449b4d1119ccb5dc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockVoice: {fileID: 0}
   knockInfos:
   - ObjectTag: GuideRoad
-    knockSound: {fileID: 8300000, guid: dde6a2fc0d0651045a230caf16ac8d57, type: 3}
+    knockSound: {fileID: 8300000, guid: b40ce281a737a1045841589aed1cbd02, type: 3}
     knockShakeStrength: 500
-    knockShakeTime: 50
+    knockShakeTime: 0.5
   - ObjectTag: Road
-    knockSound: {fileID: 8300000, guid: 47f20f6f397919d419f952530926212a, type: 3}
+    knockSound: {fileID: 8300000, guid: 63f8ef3e1d7cd9f48863c7d34317b5b8, type: 3}
     knockShakeStrength: 200
-    knockShakeTime: 50
+    knockShakeTime: 0.5
   - ObjectTag: CarRoad
-    knockSound: {fileID: 8300000, guid: 0e8e902146e43cf4b89380e4658e3e7b, type: 3}
+    knockSound: {fileID: 8300000, guid: 283d854e6f7b14541b3964915a207b39, type: 3}
     knockShakeStrength: 300
-    knockShakeTime: 50
+    knockShakeTime: 0.5
+  - ObjectTag: GuideRoadDot
+    knockSound: {fileID: 8300000, guid: d6956485f28549849a719b9694b80035, type: 3}
+    knockShakeStrength: 700
+    knockShakeTime: 0.5
+  - ObjectTag: Wall
+    knockSound: {fileID: 8300000, guid: daec26d11679b2543841b7d6f6bdfadf, type: 3}
+    knockShakeStrength: 300
+    knockShakeTime: 0.3
+  - ObjectTag: Store
+    knockSound: {fileID: 8300000, guid: 077d5445a2580a44aa6181b3c6f0cbe5, type: 3}
+    knockShakeStrength: 300
+    knockShakeTime: 0.3
+  - ObjectTag: WalkingLights
+    knockSound: {fileID: 8300000, guid: a8857d1706fdbb942a7fde547dd0ddeb, type: 3}
+    knockShakeStrength: 200
+    knockShakeTime: 0.3
+  - ObjectTag: Fencing
+    knockSound: {fileID: 8300000, guid: d3f0124e3104a4342a2196dfec6d4364, type: 3}
+    knockShakeStrength: 300
+    knockShakeTime: 0.3
+  - ObjectTag: Tree
+    knockSound: {fileID: 8300000, guid: e6db02cdb61ce5d479504247320ec117, type: 3}
+    knockShakeStrength: 400
+    knockShakeTime: 300
 --- !u!1 &1843507465720924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,3 +1244,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &7894512000103174907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3424987188042360692}
+  m_Layer: 9
+  m_Name: KnockVoicePlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3424987188042360692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894512000103174907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4633950346328874}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

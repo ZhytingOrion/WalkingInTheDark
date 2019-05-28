@@ -39,7 +39,14 @@ public class AddChangeMatScript : EditorWindow {
             GameObject g = gs[i];
             try
             {
-                if (g.GetComponent<MatChange>() != null) continue;
+                if (g.GetComponent<MatChange>() != null)
+                {
+                    DestroyImmediate(g.GetComponent<MatChange>());
+                }
+                if (g.GetComponent<MatChange>() != null)
+                {
+                    DestroyImmediate(g.GetComponent<MatChange>());
+                }
                 Renderer r = g.GetComponent<Renderer>();
                 if (r == null) continue;
                 if (r.sharedMaterial == null) continue;                
@@ -48,7 +55,7 @@ public class AddChangeMatScript : EditorWindow {
             {
                 continue;
             }
-            g.AddComponent<MatChange>();
+            //g.AddComponent<MatChange>();
         }
         isAdding = false;
     }

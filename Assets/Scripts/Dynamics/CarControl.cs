@@ -29,7 +29,7 @@ public class CarControl : MonoBehaviour {
         agent.SetDestination(agentDest);
         maxSpeed = this.agent.speed;
         lastRotation = this.transform.rotation;
-        agent.speed = Random.Range(3.5f, 4.5f);
+        agent.speed = Random.Range(3f, 4f);
     }
 	
 	// Update is called once per frame

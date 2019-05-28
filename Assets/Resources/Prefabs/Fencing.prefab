@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 5977524952638992579}
   m_Layer: 0
   m_Name: Fencing
-  m_TagString: Wall
+  m_TagString: Fencing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

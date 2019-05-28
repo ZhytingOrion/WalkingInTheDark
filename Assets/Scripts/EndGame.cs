@@ -42,6 +42,7 @@ public class EndGame : MonoBehaviour {
     public void ResetLevel(int level)
     {
         if (GameInfo.Instance.CntGameState == GameState.Finish) return;
+        if (GameInfo.Instance.CntLevel == 6) return;
         int cntGameLevel = level;                  //移动起点终点到对应位置
         Transform end = Ends[cntGameLevel].transform;
         this.transform.position = end.position;
@@ -54,7 +55,7 @@ public class EndGame : MonoBehaviour {
     private void PassLevel()
     {
         GameInfo.Instance.LevelPass();
-        if (GameInfo.Instance.CntGameState == GameState.Finish)          //游戏结束，删除目的地
+        if (GameInfo.Instance.CntLevel == 6)          //游戏结束，删除目的地
         {
             Destroy(this.gameObject);
             return;

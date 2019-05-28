@@ -28,6 +28,7 @@ public class HPRenders : MonoBehaviour
 
     private void HPrender(int hp)
     {
+        if (GameInfo.Instance.CntLevel == 6) return;
         int total = hps.Count;
         for(int i = 0; i<10; i++)
         {
